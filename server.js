@@ -19,17 +19,18 @@ const corsOptions = {
 //   }
 
 app.use(cors(corsOptions))
-app.use(express.static('public'));
+app.use(express.static('public')); // to make public folder static
 
 const connectDB = require('./config/db');
 connectDB();
 
-app.use(express.json());
+app.use(express.json()); // to enable json data to be sent to the server
 
+// Template engine. 
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
-// Routes 
+// Routes to be used
 app.use('/api/files', require('./routes/files'));
 app.use('/files', require('./routes/show'));
 app.use('/files/download', require('./routes/download'));

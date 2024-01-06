@@ -1,20 +1,20 @@
 const router = require('express').Router();
-const multer = require('multer');
+const multer = require('multer'); // multer used for file uploads
 const path = require('path');
 const File = require('../models/file');
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); // uuidv4 used to generate unique id for each file
 
-let storage = multer.diskStorage({
+let storage = multer.diskStorage({ 
     destination: (req, file, cb) => cb(null, 'uploads/') ,
     filename: (req, file, cb) => {
         const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-              cb(null, uniqueName)
+              cb(null, uniqueName) //to generate unique name for each file extname : gives  extension of file
     } ,
 });
 
 let upload = multer({ storage, limits:{ fileSize: 1000000 * 100 }, }).single('myfile'); //100mb
-
-router.post('/', (req, res) => {
+// myfile is the name of the input field in the form
+router.post('/', (req, res) => { 
     upload(req, res, async (err) => {
       if (err) {
         return res.status(500).send({ error: err.message });
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 });
 
 router.post('/send', async (req, res) => {
-  const { uuid, emailTo, emailFrom, expiresIn } = req.body;
+  const { uuid, emailTo, emailFrom, expiresIn } = req.body; //destructuring
   if(!uuid || !emailTo || !emailFrom) {
       return res.status(422).send({ error: 'All fields are required except expiry.'});
   }
@@ -49,9 +49,9 @@ router.post('/send', async (req, res) => {
     sendMail({
       from: emailFrom,
       to: emailTo,
-      subject: 'inShare file sharing',
+      subject: 'FileJet File Transferer',
       text: `${emailFrom} shared a file with you.`,
-      html: require('../services/emailTemplate')({
+      html: require('../services/emailTemplate')({//emailTemplate is a function created in emailTemplate.js
                 emailFrom, 
                 downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email` ,
                 size: parseInt(file.size/1000) + ' KB',

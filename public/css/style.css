@@ -1,7 +1,8 @@
 :root {
-    --main-bg-color: #edf5fe;
-    --light-blue: #03a9f4;
-    --dark-blue: #028bca;
+  --main-bg-color: #f9f5e1; /* Light yellow background color */
+  --light-blue: #2ecc71; /* Light green color */
+  --border-color: #e67e22; /* Orange for borders */
+  --container-width: 500px;
   }
 
   body {

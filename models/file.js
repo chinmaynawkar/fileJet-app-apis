@@ -1,3 +1,6 @@
+// This is the schema for the file model. 
+//It contains the filename, path, size, uuid, sender, and receiver of the file.
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

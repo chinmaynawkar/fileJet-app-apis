@@ -3,10 +3,7 @@
 Rest api using Node, Express, Mongo.
 We will build rest api for a simple file sharing app. 
 
-GitHUB Repo Link : https://github.com/chinmaynawkar
 
-### Frontend source code can be found on Github
-https://github.com/chinmaynawkar
 
 
 ## Installation 

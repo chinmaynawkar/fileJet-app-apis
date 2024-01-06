@@ -1,3 +1,5 @@
+//this is the script for fetching the records
+
 const connectDB = require('./config/db');
 const File = require('./models/file');
 const fs = require('fs');
